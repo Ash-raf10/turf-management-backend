@@ -17,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::fallback(function(){
+    $response = [
+        'success' => false,
+        'data'    => "",
+        'message' => "Route Not Found",
+        'code' => 99
+    ];
+
+    return response()->json($response, 404);
+});

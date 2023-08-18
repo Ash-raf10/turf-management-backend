@@ -19,7 +19,7 @@ trait ApiResponse
         array|string $data = "",
         array|string $message = "",
         int $statusCode = 200,
-        $internalCode = 0
+        $internalCode = 0000
     ) {
         $response = [
             'success' => $status,

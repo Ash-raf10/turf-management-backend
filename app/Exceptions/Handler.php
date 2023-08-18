@@ -58,43 +58,43 @@ class Handler extends ExceptionHandler
         $this->renderable(function (NotFoundHttpException $e, $request) {
             if ($request->wantsJson()) {
                 Log::error($e);
-                return $this->sendResponse(false, "", "Resource Not Found", 404, 1);
+                return $this->sendResponse(false, "", "Resource Not Found", 404, 4001);
             }
         });
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             if ($request->wantsJson()) {
                 Log::error($e);
-                return $this->sendResponse(false, "", "The specified method for the request is invalid", 405, 2);
+                return $this->sendResponse(false, "", "The specified method for the request is invalid", 405, 4002);
             }
         });
         $this->renderable(function (BadRequestHttpException $e, $request) {
             if ($request->wantsJson()) {
                 Log::error($e);
-                return $this->sendResponse(false, "", "Bad Request", 400, 3);
+                return $this->sendResponse(false, "", "Bad Request", 400, 4003);
             }
         });
         $this->renderable(function (BadMethodCallException $e, $request) {
             if ($request->wantsJson()) {
                 Log::error($e);
-                return $this->sendResponse(false, "", "Bad Method call", 500, 4);
+                return $this->sendResponse(false, "", "Bad Method call", 500, 4004);
             }
         });
         $this->renderable(function (HttpException $e, $request) {
             if ($request->wantsJson()) {
                 Log::error($e);
-                return $this->sendResponse(false, "", "Something went wrong, try again", $e->getStatusCode(), 5);
+                return $this->sendResponse(false, "", "Something went wrong, try again", $e->getStatusCode(), 4005);
             }
         });
         $this->renderable(function (Exception $e, $request) {
             if ($request->wantsJson()) {
                 Log::error($e);
-                return $this->sendResponse(false, "", "Something went wrong", 404, 6);
+                return $this->sendResponse(false, "", "Something went wrong", 404, 4006);
             }
         });
         $this->renderable(function (Throwable $e, $request) {
             if ($request->wantsJson()) {
                 Log::error($e);
-                return $this->sendResponse(false, "", "Error", 404, 7);
+                return $this->sendResponse(false, "", "Error", 404, 4007);
             }
         });
     }

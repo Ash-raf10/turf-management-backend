@@ -31,6 +31,9 @@ Route::middleware('auth.jwt')->controller(AuthController::class)->group(function
     Route::get('me', 'me');
 });
 
+Route::prefix('customer')->controller(CustomerController::class)->group(function () {
+    Route::post('register', 'register');
+});
 
 Route::fallback(function () {
     $response = [

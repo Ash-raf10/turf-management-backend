@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\Customer\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::fallback(function(){
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+});
+
+Route::middleware('auth.jwt')->controller(AuthController::class)->group(function () {
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
+    Route::get('me', 'me');
+});
+
+
+Route::fallback(function () {
     $response = [
         'success' => false,
         'data'    => "",

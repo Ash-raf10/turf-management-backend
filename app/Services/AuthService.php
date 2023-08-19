@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Http\Resources\UserResource;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -13,7 +12,7 @@ class AuthService
      * login user with email and password
      *
      * @param  array $credentials['email','password]
-     * @return array<false|string,User|null>
+     * @return array<false|string,UserResource|null>
      */
     public function login(array $credentials): array
     {
@@ -25,7 +24,7 @@ class AuthService
 
     /**
      * Get the authenticated User
-     * @return User|null
+     * @return UserResource|null
      */
     public function getAuthUser(): ?UserResource
     {

@@ -31,7 +31,7 @@ class AuthController extends BaseController
         return $this->sendResponse(true, [
             'user' => $user,
             'Authorization' => "Bearer $token"
-        ], __("Successfully Logged In"), 403, 6000);
+        ], __("Successfully Logged In"));
     }
 
 
@@ -73,6 +73,6 @@ class AuthController extends BaseController
         return $this->sendResponse(true, [
             'user' => $user,
             'Authorization' => "Bearer $token"
-        ], __("Successfully Logged In"), 403, 6000);
+        ]);
     }
 }

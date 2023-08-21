@@ -20,5 +20,4 @@ yarn-error.log
 /docker/nginx/ssl/default.crt
 /docker/nginx/ssl/default.csr
 /docker/nginx/ssl/default.key
-composer.lock
 /public/vendor

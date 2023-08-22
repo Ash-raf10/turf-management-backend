@@ -16,7 +16,11 @@ class AuthService
      */
     public function login(array $credentials): array
     {
-        $token = Auth::attempt($credentials);
+        // for login with either mobile or email
+        $modifiedCredentials[$credentials['identifier_type']] = $credentials['email_phone'];
+        $modifiedCredentials['password'] = $credentials['password'];
+
+        $token = Auth::attempt($modifiedCredentials);
         $user = $this->getAuthUser();
 
         return [$token, $user];

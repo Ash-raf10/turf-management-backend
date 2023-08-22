@@ -25,7 +25,13 @@ class AuthController extends BaseController
         [$token, $user] = $this->authService->login($request->validated());
 
         if (!$token || !$user) {
-            return $this->sendResponse(false, "", __("Unauthorized"), 403, 6000);
+            return $this->sendResponse(
+                false,
+                "",
+                ("$request->identifier_type and password did not match"),
+                403,
+                6000
+            );
         }
 
         return $this->sendResponse(true, [

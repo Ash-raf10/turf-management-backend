@@ -17,6 +17,6 @@ class CustomerController extends BaseController
     {
         $user = $this->customerService->registerUser($request->validated());
 
-        return $this->sendResponse(true, $user, __("Registration Successfull"), 200, 6000);
+        return $this->sendResponse(true, $user, __("Registration Successfull, Please verify the OTP"), 201, 6001);
     }
 }

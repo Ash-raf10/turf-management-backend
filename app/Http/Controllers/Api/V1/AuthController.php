@@ -7,6 +7,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Controllers\Api\V1\BaseController;
+use App\Http\Resources\UserResource;
+use App\Services\UserService;
 
 class AuthController extends BaseController
 {
@@ -20,7 +22,7 @@ class AuthController extends BaseController
      * @param  LoginRequest $request
      * @return JsonResponse
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request, UserService $userService): JsonResponse
     {
         [$token, $user] = $this->authService->login($request->validated());
 
@@ -34,8 +36,13 @@ class AuthController extends BaseController
             );
         }
 
+        if (!$user->otp_verified) {
+            $userService->sendOtp($user);
+            return $this->sendResponse(true, "", __("Before Login, please verify the OTP"), 307, 6001);
+        }
+
         return $this->sendResponse(true, [
-            'user' => $user,
+            'user' => new UserResource($user),
             'Authorization' => "Bearer $token"
         ], __("Successfully Logged In"));
     }

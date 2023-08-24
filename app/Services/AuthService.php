@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+
+use App\Models\User;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +14,7 @@ class AuthService
      * login user with email and password
      *
      * @param  array $credentials['email','password]
-     * @return array<false|string,UserResource|null>
+     * @return array<false|string,User|null>
      */
     public function login(array $credentials): array
     {
@@ -21,7 +23,7 @@ class AuthService
         $modifiedCredentials['password'] = $credentials['password'];
 
         $token = Auth::attempt($modifiedCredentials);
-        $user = $this->getAuthUser();
+        $user = Auth::user();
 
         return [$token, $user];
     }

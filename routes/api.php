@@ -16,9 +16,7 @@ use App\Http\Controllers\Api\V1\Customer\CustomerController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 
 
 Route::controller(AuthController::class)->group(function () {

@@ -2,11 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Mail\OtpMail;
 use App\Events\UserCreated;
-use App\Services\OtpService;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class SendRegistrationOtp
 {
@@ -21,7 +19,7 @@ class SendRegistrationOtp
     /**
      * Create the event listener.
      */
-    public function __construct(private OtpService $otpService)
+    public function __construct(private UserService $userService)
     {
         // ...
     }
@@ -33,21 +31,7 @@ class SendRegistrationOtp
     {
         // Access the user using $event->user...
         Log::info("User Created Observer", $event->user->toArray());
-        $otpResponse = $this->otpService->generate($event->user);
-
-        if (!$otpResponse->success) {
-            Log::info("Otp generation Failed", json_encode($otpResponse));
-
-            return;
-        }
-
-        if (config('otp.email')) {
-            Log::info("Sending OTP in Mail");
-            Mail::to($event->user->email)->send(new OtpMail($event->user, $otpResponse->data));
-        }
-        if (config('otp.mobile')) {
-            Log::info("Sending OTP in Mobile");
-            //integrate mobile otp service
-        }
+        $result = $this->userService->sendOtp($event->user);
+        Log::info("Sending OTP Success - $result");
     }
 }

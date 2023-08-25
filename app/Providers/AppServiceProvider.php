@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\OtpService;
+use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('otp', function () {
             return new OtpService();
+        });
+        $this->app->bind(UserService::class, function () {
+            return new UserService();
         });
     }
 }

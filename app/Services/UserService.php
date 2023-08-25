@@ -5,11 +5,25 @@ namespace App\Services;
 use App\Models\User;
 use App\Mail\OtpMail;
 use App\Facades\OtpFacade;
+use App\Traits\InternalResponse;
+use App\Traits\InternalResponseObject;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class UserService
 {
+    use InternalResponse;
+    public function generateOtpForUser(User $user, string $type): InternalResponseObject
+    {
+        $otpResponse = OtpFacade::generate($user, $type);
+
+        if (!$otpResponse->success) {
+            return $this->response(false);
+        }
+
+        return $this->response(true, $otpResponse->data);
+    }
     /**
      * send otp to user
      *
@@ -17,25 +31,15 @@ class UserService
      *
      * @return bool
      */
-    public function sendOtp(User $user): bool
+    public function sendOtp(User $user, array $otpData): void
     {
-        $otpResponse = OtpFacade::generate($user);
-
-        if (!$otpResponse->success) {
-            Log::info("Otp generation Failed", json_encode($otpResponse));
-
-            return false;
-        }
-
         if (config('otp.email')) {
             Log::info("Sending OTP in Mail");
-            Mail::to($user->email)->send(new OtpMail($user, $otpResponse->data));
+            Mail::to($user->email)->send(new OtpMail($user, $otpData));
         }
         if (config('otp.mobile')) {
             Log::info("Sending OTP in Mobile");
             //integrate mobile otp service
         }
-
-        return true;
     }
 }

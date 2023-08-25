@@ -7,7 +7,6 @@ use App\Mail\OtpMail;
 use App\Facades\OtpFacade;
 use App\Traits\InternalResponse;
 use App\Traits\InternalResponseObject;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 

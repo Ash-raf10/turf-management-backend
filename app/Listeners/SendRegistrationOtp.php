@@ -31,7 +31,7 @@ class SendRegistrationOtp
     {
         // Access the user using $event->user...
         Log::info("User Created Observer", $event->user->toArray());
-        $result = $this->userService->sendOtp($event->user);
+        $result = $this->userService->sendOtp($event->user, $event->otpData);
         Log::info("Sending OTP Success - $result");
     }
 }

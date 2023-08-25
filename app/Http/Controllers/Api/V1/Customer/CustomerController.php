@@ -15,8 +15,18 @@ class CustomerController extends BaseController
 
     public function register(CustomerUserRegisterRequest $request)
     {
-        $user = $this->customerService->registerUser($request->validated());
+        $otpResponse = $this->customerService->registerUser($request->validated());
 
-        return $this->sendResponse(true, $user, __("Registration Successfull, Please verify the OTP"), 201, 6001);
+        if (!$otpResponse->success) {
+            return $this->sendResponse(false, "", __("Registration Failed, Please try again"), 404, 4001);
+        }
+
+        return $this->sendResponse(
+            true,
+            $otpResponse->data,
+            __("Registration Successfull, Please verify the OTP"),
+            201,
+            6001
+        );
     }
 }

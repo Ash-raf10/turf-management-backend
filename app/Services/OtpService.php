@@ -40,4 +40,14 @@ class OtpService
             return $this->response(false);
         }
     }
+
+    public function filterOtpResponse(array $otpResponse): array
+    {
+
+        $otpResponse['token'] = $otpResponse['id'];
+        unset($otpResponse['otp']);
+        unset($otpResponse['id']);
+
+        return $otpResponse;
+    }
 }

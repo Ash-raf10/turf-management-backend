@@ -19,4 +19,12 @@ class Otp extends Model
     protected $guarded = [
         'uuid'
     ];
+
+    /**
+     * Get the user of the otp.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

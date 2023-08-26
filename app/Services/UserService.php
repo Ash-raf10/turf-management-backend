@@ -41,4 +41,17 @@ class UserService
             //integrate mobile otp service
         }
     }
+
+    /**
+     * otp verified true or false
+     *
+     * @param  User $user
+     * @param  bool $isVerified
+     * @return void
+     */
+    public function otpVerified(User $user, bool $isVerified): void
+    {
+        $user->otp_verified = $isVerified;
+        $user->save();
+    }
 }

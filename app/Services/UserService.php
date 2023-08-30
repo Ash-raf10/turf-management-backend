@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Mail\OtpMail;
 use App\Facades\OtpFacade;
+use App\Services\Sms\SmsService;
 use App\Traits\InternalResponse;
 use App\Traits\InternalResponseObject;
 use Illuminate\Support\Facades\Log;
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Mail;
 class UserService
 {
     use InternalResponse;
+
+    protected $smsService;
+
+    public function __construct(SmsService $smsService)
+    {
+        $this->smsService = $smsService;
+    }
+
+
     public function generateOtpForUser(User $user, string $type): InternalResponseObject
     {
         $otpResponse = OtpFacade::generate($user, $type);
@@ -38,7 +48,10 @@ class UserService
         }
         if (config('otp.mobile')) {
             Log::info("Sending OTP in Mobile");
-            //integrate mobile otp service
+
+            $this->smsService->setSmsTemplate('sms.otp')
+                ->setSmsTemplateVariables(['user' => $user, 'otp' => $otpData])
+                ->sendSms($user->mobile)->saveSmsInfo();
         }
     }
 

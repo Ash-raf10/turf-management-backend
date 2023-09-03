@@ -44,7 +44,7 @@ class OtpController extends BaseController
 
             Log::info("Update user with otp verified");
             $userService->otpVerified($otp->user, true);
-            $internalCode = ($otp->otp_type === GlobalType::getOtpType('ForgotPassword')) ? 6001 : 60002;
+            $internalCode = ($otp->otp_type !== GlobalType::getOtpType('ForgotPassword')) ? 6001 : 6002;
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

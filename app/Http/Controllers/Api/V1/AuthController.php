@@ -34,7 +34,7 @@ class AuthController extends BaseController
                 "",
                 ("$request->identifier_type and password did not match"),
                 403,
-                6000
+                4001
             );
         }
 

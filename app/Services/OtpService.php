@@ -5,6 +5,8 @@ namespace App\Services;
 use Carbon\Carbon;
 use App\Models\Otp;
 use App\Models\User;
+use App\Services\Sms\SmsProviderService;
+use App\Services\Sms\SmsService;
 use App\Traits\InternalResponse;
 use Illuminate\Support\Facades\Log;
 use App\Traits\InternalResponseObject;
@@ -176,7 +178,8 @@ class OtpService
      */
     public function resendOtp(Otp $otp, InternalResponseObject $otpResponse): InternalResponseObject
     {
-        $userService = new UserService;
+        $smsService = new SmsService(new SmsProviderService);
+        $userService = new UserService($smsService);
         // make current otp invalid
         $otp->is_valid = 0;
         $otp->save();

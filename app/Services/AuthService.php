@@ -47,4 +47,15 @@ class AuthService
     {
         return Auth::refresh();
     }
+
+    /**
+     * generateTokenForUser
+     *
+     * @param  User $user
+     * @return ?string
+     */
+    public function generateTokenForUser(User $user)
+    {
+        return Auth::fromUser($user);
+    }
 }

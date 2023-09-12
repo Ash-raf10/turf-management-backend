@@ -5,11 +5,11 @@ namespace App\Services;
 use Carbon\Carbon;
 use App\Models\Otp;
 use App\Models\User;
-use App\Services\Sms\SmsProviderService;
 use App\Services\Sms\SmsService;
 use App\Traits\InternalResponse;
 use Illuminate\Support\Facades\Log;
 use App\Traits\InternalResponseObject;
+use App\Services\Sms\SmsProviderService;
 
 class OtpService
 {
@@ -48,7 +48,7 @@ class OtpService
                 'id' => $otpRecord->id,
                 'expiry_time' => $otp['expired_at']
             ];
-            return $this->response(true, $data);
+            return $this->response(true, $data, __("OTP sent successfully"));
         } else {
             return $this->response(false, "", __("OTP generation failed"));
         }
@@ -165,7 +165,7 @@ class OtpService
         $resendOtpResponse =  $this->resendOtp($otp, $otpResponse);
         Log::info("Send OTP response- " . json_encode($resendOtpResponse));
 
-        return $this->response(true, $resendOtpResponse->data);
+        return $this->response(true, $resendOtpResponse->data, $resendOtpResponse->msg);
     }
 
 
@@ -185,8 +185,9 @@ class OtpService
         $otp->save();
 
         $userService->sendOtp($otp->user, $otpResponse->data);
+        $msg = $otpResponse->msg;
         $otpResponse = $this->filterOtpResponse($otpResponse->data);
 
-        return $this->response(true, $otpResponse);
+        return $this->response(true, $otpResponse, $msg);
     }
 }

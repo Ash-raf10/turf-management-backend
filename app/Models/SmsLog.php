@@ -17,7 +17,7 @@ class SmsLog extends Model
      * @var array<int, string>
      */
     protected $guarded = [
-        'uuid'
+        'id'
     ];
 
     /**

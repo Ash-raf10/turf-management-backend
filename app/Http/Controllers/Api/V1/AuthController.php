@@ -46,7 +46,7 @@ class AuthController extends BaseController
             }
             $userService->sendOtp($user, $otpResponse->data);
             $otpResponse = OtpFacade::filterOtpResponse($otpResponse->data);
-            return $this->sendResponse(true, $otpResponse, __("Before Login, please verify the OTP"), 307, 6001);
+            return $this->sendResponse(true, $otpResponse, __("Before Login, please verify the OTP"), 200, 6001);
         }
 
         return $this->sendResponse(true, [

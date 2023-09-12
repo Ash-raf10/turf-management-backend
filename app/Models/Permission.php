@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Models\Permission as BasePermissionModel;
 
-class SmsLog extends Model
+class Permission extends BasePermissionModel
 {
     use HasFactory;
     use HasUuids;
@@ -19,12 +19,4 @@ class SmsLog extends Model
     protected $guarded = [
         'id'
     ];
-
-    /**
-     * Get the user of the otp.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

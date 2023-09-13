@@ -21,3 +21,4 @@ yarn-error.log
 /docker/nginx/ssl/default.csr
 /docker/nginx/ssl/default.key
 /public/vendor
+compose-dev.yaml

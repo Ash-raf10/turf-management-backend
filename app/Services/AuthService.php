@@ -5,10 +5,17 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use App\Models\SsoUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Traits\InternalResponseObject;
+use App\Traits\InternalResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthService
 {
+    use InternalResponse;
 
     /**
      * login user with email and password
@@ -57,5 +64,37 @@ class AuthService
     public function generateTokenForUser(User $user)
     {
         return Auth::fromUser($user);
+    }
+
+    
+    public function ssoUserRegister(array $requestData): InternalResponseObject
+    {
+        $user = User::where('email',$requestData['email'])->first();
+        if($user){
+            //login
+        }
+        else{
+            //registration
+            DB::beginTransaction();
+            $newRequest['name'] = $requestData['name'];
+            $newRequest['email'] = $requestData['email'];
+            $newRequest['password'] =  Hash::make($requestData['social_id']);
+            $newRequest['otp_verified'] =  1;
+
+            $newUser = User::create($newRequest);
+
+            Log::info("Created User");
+            Log::info(json_encode($newUser));
+
+            $requestData['user_id'] = $newUser['id'];
+            $newSsoUser = SsoUser::create($requestData);
+            DB::commit();
+            Log::info("SsoUser created");
+
+            //login 
+
+        }
+        
+        return $this->response();
     }
 }

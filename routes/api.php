@@ -25,7 +25,7 @@ Route::controller(AuthController::class)->group(function () {
 
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('socialLogin', 'socialLogin');
+    Route::post('sociallogin', 'sociallogin');
 });
 
 

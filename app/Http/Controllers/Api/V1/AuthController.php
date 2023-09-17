@@ -96,20 +96,17 @@ class AuthController extends BaseController
         ]);
     }
 
-    public function socialLogin(SocialLoginRequest $request): JsonResponse
+    public function sociallogin(SocialLoginRequest $request): JsonResponse
     {
-        $response = $this->authService->ssoUserRegister($request->validated());
+        [$token,$user] = $this->authService->ssoUserRegister($request->validated());
 
-        if (!$response->success) {
-            return $this->sendResponse(false, "", __("Registration Failed, Please try again"), 404, 4001);
+        if (!$token) {
+            return $this->sendResponse(false, "", __("Login Failed, Please try again"), 404, 4001);
         }
 
-        return $this->sendResponse(
-            true,
-            $response->data,
-            __("Registration Successfull, Please verify the OTP"),
-            201,
-            6001
-        );
+        return $this->sendResponse(true, [
+            'user' => new UserResource($user),
+            'Authorization' => "Bearer $token"
+        ], __("Successfully Logged In"));
     }
 }

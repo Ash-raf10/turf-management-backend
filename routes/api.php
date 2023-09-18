@@ -23,6 +23,13 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
 });
 
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('sociallogin', 'sociallogin');
+});
+
+
+
 Route::controller(OtpController::class)->group(function () {
     Route::post('otp', 'matchOtp');
     Route::post('otp/resend', 'resendOtp');

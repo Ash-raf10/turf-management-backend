@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Controllers\Api\V1\BaseController;
+use App\Http\Requests\SocialLoginRequest;
 use App\Http\Resources\UserResource;
 use App\Services\GlobalType;
 use App\Services\UserService;
@@ -56,8 +57,6 @@ class AuthController extends BaseController
     }
 
 
-
-
     /**
      * logout user
      *
@@ -95,5 +94,19 @@ class AuthController extends BaseController
             'user' => $user,
             'Authorization' => "Bearer $token"
         ]);
+    }
+
+    public function sociallogin(SocialLoginRequest $request): JsonResponse
+    {
+        [$token,$user] = $this->authService->ssoUserRegister($request->validated());
+
+        if (!$token) {
+            return $this->sendResponse(false, "", __("Login Failed, Please try again"), 404, 4001);
+        }
+
+        return $this->sendResponse(true, [
+            'user' => new UserResource($user),
+            'Authorization' => "Bearer $token"
+        ], __("Successfully Logged In"));
     }
 }

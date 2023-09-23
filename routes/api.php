@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Company\FieldController;
 use App\Http\Controllers\Api\V1\Company\CompanyController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Documents\ImageController;
+use App\Http\Controllers\Api\V1\Slot\SlotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,15 @@ Route::middleware('auth.jwt')->group(function () {
 });
 
 
+
+Route::prefix('company')->middleware('auth.jwt')->group(function () {
+    Route::prefix('slot')->controller(SlotController::class)->group(function () {
+        Route::get('',  'index');
+        Route::post('save', 'save');
+        Route::put('update', 'update');
+        Route::delete('{slot}',  'delete');
+    });
+});
 
 Route::fallback(function () {
     $response = [

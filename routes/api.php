@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\Company\RoleController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\OtpController;
+use App\Http\Controllers\Api\V1\Company\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,11 +46,13 @@ Route::middleware('auth.jwt')->controller(AuthController::class)->group(function
 Route::prefix('customer')->controller(CustomerController::class)->group(function () {
     Route::post('register', 'register');
 });
+Route::prefix('company')->controller(CompanyController::class)->group(function () {
+    Route::post('register', 'register');
+});
 
 Route::prefix('company')->middleware('auth.jwt')->group(function () {
     Route::apiResource('roles', RoleController::class);
 });
-
 
 Route::fallback(function () {
     $response = [

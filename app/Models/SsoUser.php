@@ -27,7 +27,7 @@ class SsoUser extends Model
      */
 
     /**
-     * Get the user of the otp.
+     * Get the user of the SsoUser.
      */
     
     public function user()

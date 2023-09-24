@@ -57,6 +57,14 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * Get the user of the otp.
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
      * @return array
@@ -65,4 +73,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+
 }

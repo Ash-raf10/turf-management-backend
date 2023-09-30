@@ -72,6 +72,8 @@ Route::prefix('company')->middleware('auth.jwt')->group(function () {
         Route::post('save', 'save');
         Route::put('update', 'update');
         Route::delete('{slot}',  'delete');
+        Route::post('search',  'search');
+        Route::post('book',  'book');
     });
 });
 

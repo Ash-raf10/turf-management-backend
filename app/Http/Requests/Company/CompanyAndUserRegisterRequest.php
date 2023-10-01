@@ -61,12 +61,13 @@ class CompanyAndUserRegisterRequest extends FormRequest
             'name' => 'required|string|max:30',
             'email' => 'required|email|max:255|unique:users',
             'password' => [
-                'required', Password::min(8)
+                'required','confirmed', Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
             ],
+            // 'confirm_password' => 'required',
             'mobile' => [
                 'required', 'string', 'regex:/^(((\+|00)?880)|0)(\d){10}$/',
                 'max:20', 'min:11','unique:users,mobile,except,id'  //  mobile number should be unique

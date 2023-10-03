@@ -26,11 +26,7 @@ class CompanyService
     {
         DB::beginTransaction();
         //company entry
-        $companyRequest['name'] = $requestData['company_name'];
-        $companyRequest['address'] = $requestData['address'];
-        $companyRequest['email'] = $requestData['company_email'];
-        $companyRequest['phone'] = $requestData['company_phone'];
-        $companyRequest['page_url'] = $requestData['page_url'];
+        $companyRequest = $this->mapCompany($requestData);
         $company = Company::create($companyRequest);
         Log::info("Company created");
         Log::info(json_encode($company));
@@ -58,8 +54,16 @@ class CompanyService
             DB::rollBack();
             Log::error($ex);
             return $this->response(false);
-        }
+        }  
+    }
 
-        
+    private function mapCompany(array $requestData) :array {
+
+        $companyRequest['name'] = $requestData['company_name'];
+        $companyRequest['address'] = $requestData['address'];
+        $companyRequest['email'] = $requestData['company_email'];
+        $companyRequest['phone'] = $requestData['company_phone'];
+        $companyRequest['page_url'] = $requestData['page_url'];
+        return $companyRequest;
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Permission;
-use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class AssignPermissionSeeder extends Seeder
@@ -21,20 +19,4 @@ class AssignPermissionSeeder extends Seeder
             RoleHasPermissionSeeder::class,
         ]);
     }
-}
-
-
-
-
-
-/**
- * Run the database seeders.
- */
-public function run(): void
-{
-    $this->call([
-        UserSeeder::class,
-        PostSeeder::class,
-        CommentSeeder::class,
-    ]);
 }

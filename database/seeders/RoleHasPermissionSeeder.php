@@ -15,7 +15,7 @@ class RoleHasPermissionSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::select('uuid')->where('name', 'admin')->first();
+        $role = Role::select('id')->where('name', 'admin')->first();
         $allPermissions = Permission::all();
 
         if ($role) {

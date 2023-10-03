@@ -14,6 +14,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        //operation types
         $ops = ['create', 'read', 'update', 'delete'];
         $module = [
             'user' => [

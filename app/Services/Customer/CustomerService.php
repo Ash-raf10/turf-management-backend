@@ -27,6 +27,7 @@ class CustomerService
         $requestData['password'] =  Hash::make($requestData['password']);
 
         $newUser = User::create($requestData);
+        $newUser->assignRole('customer');
 
         Log::info("Created User");
         Log::info(json_encode($newUser));

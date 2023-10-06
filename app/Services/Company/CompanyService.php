@@ -35,6 +35,7 @@ class CompanyService
             $requestData['company_id'] = $company['id'];
     
             $newUser = User::create($requestData);
+            $newUser->assignRole('admin');
     
             Log::info("Created User");
             Log::info(json_encode($newUser));

@@ -26,6 +26,8 @@ class UserResource extends JsonResource
             'city' => $this->city,
             'birth_date' => $this->birth_date,
             'image' => $this->image,
+            'role' => $this->getRoleNames()->first(),
+            'permissions' =>  PermissionResource::collection($this->getAllPermissions()),
             'record_status' => $this->record_status,
             'created_at' => $this->created_at->format('d-F-Y'),
             'updated_at' => $this->updated_at->format('d-F-y')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TurfRequest extends FormRequest
@@ -40,15 +41,15 @@ class TurfRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100',
-            'email' => 'nullable|email|max:255|unique:turfs,email',
+            'email' => ['nullable', 'email', 'max:255', Rule::unique('turfs')->ignore($this->turf)],
             'mobile' => [
                 'required', 'string', 'regex:/^(((\+|00)?880)|0)(\d){10}$/',
-                'max:20', 'min:11', 'unique:turfs,mobile'
+                'max:20', 'min:11', Rule::unique('turfs')->ignore($this->turf)
             ],
             'address' => 'required|string|max:500',
             'district' => 'required|string|max:100',
             'description' => 'nullable|string',
-            'fb_page' => 'required|url|unique:turfs,fb_page',
+            'fb_page' => ['required', 'url', Rule::unique('turfs')->ignore($this->turf)],
             'website' => 'nullable|string|max:500'
         ];
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\CreatorUpdator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,6 +13,7 @@ class Turf extends Model
     use HasFactory;
     use HasUuids;
     use CreatorUpdator;
+    use SoftDeletes;
 
     /**
      * The attributes that are not mass assignable.

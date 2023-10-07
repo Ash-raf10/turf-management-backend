@@ -42,4 +42,35 @@ class TurfService
 
         return Turf::create($requestData);
     }
+
+    /**
+     * updateTurfInfo
+     *
+     * @param Turf $turf
+     * @param  array $requestData
+     * @return Turf
+     */
+    public function updateTurfInfo(Turf $turf, array $requestData): Turf
+    {
+        $turf->update($requestData);
+
+        return $turf->refresh();
+    }
+
+    /**
+     * soft delete turf
+     *
+     * @param Turf $turf
+     * @return bool
+     */
+    public function deleteTurf(Turf $turf): bool
+    {
+        $turf->record_status = GlobalStatus::getRecordStatus('Deleted');
+        $turf->save();
+
+        if ($turf->delete()) {
+            return true;
+        }
+        return false;
+    }
 }

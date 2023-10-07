@@ -44,4 +44,32 @@ class TurfController extends BaseController
             return $this->sendResponse(false, "", __("Something Went Wrong"), 404, 4001);
         }
     }
+
+    public function update(Turf $turf, TurfRequest $request)
+    {
+        try {
+            $turf = $this->turfService->updateTurfInfo($turf, $request->validated());
+
+            return $this->sendResponse(true, new TurfResource($turf), __("Successfully updated"), 200);
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return $this->sendResponse(false, "", __("Something Went Wrong"), 404, 4001);
+        }
+    }
+
+    public function destroy(Turf $turf)
+    {
+        $result = false;
+        try {
+            $result = $this->turfService->deleteTurf($turf);
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+
+        if ($result) {
+            return $this->sendResponse(true, "", __("Successfully deleted"), 200);
+        }
+        return $this->sendResponse(false, "", __("Something Went Wrong"), 404, 4001);
+    }
 }

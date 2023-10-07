@@ -8,6 +8,7 @@ use App\Http\Requests\TurfRequest;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Http\Resources\TurfResource;
+use App\Models\Turf;
 
 class TurfController extends BaseController
 {
@@ -22,6 +23,13 @@ class TurfController extends BaseController
         [$turfData, $pagination] = $this->paginateData($turfQuery);
 
         return $this->sendPaginationResponse(TurfResource::collection($turfData), $pagination);
+    }
+
+    public function show(Turf $turf)
+    {
+        $turf->load('company', 'creator', 'updator');
+
+        return $this->sendResponse(true, new TurfResource($turf));
     }
 
     public function store(TurfRequest $request)

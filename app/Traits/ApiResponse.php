@@ -30,4 +30,24 @@ trait ApiResponse
 
         return response()->json($response, $statusCode);
     }
+
+    /**
+     * SendResponse for pagination on list page
+     *
+     * @param mixed $data data or result
+     * @param array $pagination pagination information
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function sendPaginationResponse(mixed $data, array $pagination)
+    {
+        $response = [
+            'success' => true,
+            'data'    => $data,
+            'pagination' => $pagination,
+            'message' => "",
+            'code' => 0
+        ];
+
+        return response()->json($response, 200);
+    }
 }

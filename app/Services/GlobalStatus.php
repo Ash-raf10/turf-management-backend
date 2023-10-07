@@ -7,6 +7,7 @@ class GlobalStatus
     private static $recordStatus = [
         'Active' => 'Active',
         'Inactive' => 'Inactive',
+        'Deleted' => 'Deleted',
         'Draft' => 'Draft',
         'Completed' => 'Completed',
         'Accepted' => 'Accepted',

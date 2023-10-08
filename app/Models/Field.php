@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use App\Traits\CreatorUpdator;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Turf extends Model
+class Field extends Model
 {
     use HasFactory;
     use HasUuids;
-    use CreatorUpdator;
     use SoftDeletes;
+    use CreatorUpdator;
 
     /**
      * The attributes that are not mass assignable.
@@ -24,14 +24,10 @@ class Turf extends Model
         'id'
     ];
 
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
 
-    public function fields()
+    public function turf()
     {
-        return $this->hasMany(Field::class);
+        return $this->belongsTo(Turf::class);
     }
 
     /**

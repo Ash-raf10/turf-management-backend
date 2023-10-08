@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TurfResource extends JsonResource
+class FieldResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,16 +17,10 @@ class TurfResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "email" => $this->email,
-            "mobile" => $this->mobile,
-            "address" => $this->address,
-            "district" => $this->district,
+            "field_type" => $this->field_type,
             "description" => $this->description,
-            "fb_page" => $this->fb_page,
-            "website" => $this->website,
-            "company" => new CompanyResource($this->whenLoaded('company')),
-            "fields" => FieldResource::collection($this->whenLoaded('fields')),
             'record_status' => $this->record_status,
+            'turf' => new TurfResource($this->whenLoaded('turf')),
             'created_by' => new UuidNameResource($this->whenLoaded('creator')),
             'updated_by' =>  new UuidNameResource($this->whenLoaded('updator')),
             'created_at' => $this->created_at->format('d-F-Y'),

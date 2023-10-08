@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\OtpController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\Company\RoleController;
 use App\Http\Controllers\Api\V1\Company\TurfController;
+use App\Http\Controllers\Api\V1\Company\FieldController;
 use App\Http\Controllers\Api\V1\Company\CompanyController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 
@@ -53,7 +54,8 @@ Route::prefix('company')->controller(CompanyController::class)->group(function (
 
 Route::prefix('company')->middleware('auth.jwt')->group(function () {
     Route::apiResource('roles', RoleController::class);
-    Route::apiResource('turf', TurfController::class);
+    Route::apiResource('turfs', TurfController::class);
+    Route::apiResource('turfs.fields', FieldController::class)->shallow();
 });
 
 Route::fallback(function () {

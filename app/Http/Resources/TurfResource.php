@@ -25,6 +25,7 @@ class TurfResource extends JsonResource
             "fb_page" => $this->fb_page,
             "website" => $this->website,
             "company" => new CompanyResource($this->whenLoaded('company')),
+            "fields" => FieldResource::collection($this->whenLoaded('fields')),
             'record_status' => $this->record_status,
             'created_by' => new UuidNameResource($this->whenLoaded('creator')),
             'updated_by' =>  new UuidNameResource($this->whenLoaded('updator')),

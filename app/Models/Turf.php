@@ -29,6 +29,11 @@ class Turf extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function fields()
+    {
+        return $this->hasMany(Field::class);
+    }
+
     /**
      * Get the creator of the turf.
      *

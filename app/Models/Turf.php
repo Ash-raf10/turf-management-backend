@@ -51,4 +51,12 @@ class Turf extends Model
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
+
+    /**
+     * Get all of the turf's images.
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'image');
+    }
 }

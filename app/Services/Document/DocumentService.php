@@ -85,6 +85,15 @@ class DocumentService
      */
     public function deleteDocument(string $filePath, string $fileName): bool
     {
-        return Storage::delete($filePath . "/" . $fileName);
+        $fullFilePath = $filePath . "/" . $fileName;
+        if (Storage::exists($fullFilePath)) {
+            Storage::delete($fullFilePath);
+            Log::info("File $fullFilePath deleted");
+
+            return true;
+        }
+        Log::info("File $fullFilePath does not exist");
+
+        return false;
     }
 }

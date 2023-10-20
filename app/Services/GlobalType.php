@@ -17,6 +17,19 @@ class GlobalType
         'Badmintoon' => 'Badmintoon'
     ];
 
+    private static $documentType = [
+        'turf' => [
+            'model' => 'App\Models\Turf',
+            'file_path' => 'TURF',
+            'max_count' => 5
+        ],
+        'field' => [
+            'model' => 'App\Models\Field',
+            'file_path' => 'FIELD',
+            'max_count' => 5
+        ],
+    ];
+
     public static function getOtpType($key = null): mixed
     {
 
@@ -27,5 +40,11 @@ class GlobalType
     {
 
         return $key ? self::$fieldType[$key] : self::$fieldType;
+    }
+
+    public static function getDocumentType($key = null): mixed
+    {
+
+        return $key ? self::$documentType[$key] : self::$documentType;
     }
 }

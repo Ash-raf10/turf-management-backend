@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\Company\TurfController;
 use App\Http\Controllers\Api\V1\Company\FieldController;
 use App\Http\Controllers\Api\V1\Company\CompanyController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
+use App\Http\Controllers\Api\V1\Documents\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,12 @@ Route::prefix('company')->middleware('auth.jwt')->group(function () {
     Route::apiResource('turfs', TurfController::class);
     Route::apiResource('turfs.fields', FieldController::class)->shallow();
 });
+
+Route::middleware('auth.jwt')->group(function () {
+    Route::apiResource('documents/images', ImageController::class)->only('store', 'destroy');
+});
+
+
 
 Route::fallback(function () {
     $response = [

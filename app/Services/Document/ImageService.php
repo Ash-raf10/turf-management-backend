@@ -4,6 +4,7 @@ namespace App\Services\Document;
 
 use Exception;
 use App\Models\Image;
+use RuntimeException;
 use App\Traits\InternalResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -126,6 +127,40 @@ class ImageService extends DocumentService
                 unset($images[$index]);
                 continue;
             }
+        }
+    }
+
+    /**
+     * deleteImage
+     *
+     * @param  Image $image
+     * @return InternalResponseObject
+     */
+    public function deleteImage(Image $image): InternalResponseObject
+    {
+        try {
+            DB::beginTransaction();
+            $fileName = $image->filename;
+            $filePath = $image->file_path;
+            Log::info("File Path $filePath");
+            Log::info("File Name $fileName");
+
+            if ($image->delete()) {
+                $result = $this->deleteDocument($filePath, $fileName);
+                Log::info("delete result -" . json_encode($result));
+
+                if (!$result) {
+                    throw new RuntimeException("$filePath/$fileName not deleted");
+                }
+                DB::commit();
+
+                return $this->response(true, "", __("File deleted succesfully"));
+            }
+        } catch (RuntimeException $e) {
+            Log::info($e);
+            DB::rollBack();
+
+            return $this->response(false, "", $e->getMessage());
         }
     }
 }

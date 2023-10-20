@@ -60,7 +60,7 @@ Route::prefix('company')->middleware('auth.jwt')->group(function () {
 });
 
 Route::middleware('auth.jwt')->group(function () {
-    Route::apiResource('documents/images', ImageController::class)->only('store');
+    Route::apiResource('documents/images', ImageController::class)->only('store', 'destroy');
 });
 
 

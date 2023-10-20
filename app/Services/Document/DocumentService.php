@@ -66,7 +66,7 @@ class DocumentService
     public function documentUpload(UploadedFile $file, string $filePath, string $fileName): bool
     {
         try {
-            $success = Storage::putFileAs($filePath, $file, $fileName, 'public');
+            $success = Storage::putFileAs($filePath, $file, $fileName);
 
             return $success;
         } catch (Exception $e) {

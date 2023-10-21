@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\V1\Company\FieldController;
 use App\Http\Controllers\Api\V1\Company\CompanyController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Documents\ImageController;
-use App\Http\Controllers\Api\V1\Slot\SlotController;
+use App\Http\Controllers\Api\V1\Company\SlotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +58,7 @@ Route::prefix('company')->middleware('auth.jwt')->group(function () {
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('turfs', TurfController::class);
     Route::apiResource('turfs.fields', FieldController::class)->shallow();
+    Route::apiResource('fields.slots', SlotController::class)->shallow();
 });
 
 Route::middleware('auth.jwt')->group(function () {

@@ -2,12 +2,11 @@
 
 namespace App\Services\Slot;
 
-use App\Http\Resources\Slot\SlotResource;
 use App\Models\Slot;
-use App\Models\InternalSlot;
 use App\Services\GlobalStatus;
 use App\Services\Slot\InternalSlotService;
 use App\Traits\TransformPaginate;
+use Illuminate\Database\Eloquent\Builder;
 
 class  SlotService
 {
@@ -17,13 +16,9 @@ class  SlotService
     {
     }
 
-    public function slotList(string $fieldId): array
+    public function slotList(string $fieldId): Builder
     {
-        $query =  Slot::where('field_id', $fieldId);
-        $paginateData = $this->paginateData($query);
-        $slots =  SlotResource::collection($paginateData);
-
-        return $this->transformPaginateData($slots);
+        return Slot::where('field_id', $fieldId);
     }
 
     public function saveSlots(array $requestData)

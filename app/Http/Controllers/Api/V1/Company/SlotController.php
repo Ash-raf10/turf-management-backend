@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Slot;
+namespace App\Http\Controllers\Api\V1\Company;
 
 use Exception;
 use App\Models\Slot;
+use App\Models\Field;
 use App\Models\Booking;
 use App\Models\InternalSlot;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Slot\SlotRequest;
 use App\Services\Slot\InternalSlotService;
 use App\Http\Controllers\Api\V1\BaseController;
+use App\Http\Resources\Slot\SlotResource;
 
 class SlotController extends BaseController
 {
@@ -23,11 +25,14 @@ class SlotController extends BaseController
     ) {
     }
 
-    public function index()
+    public function index(Field $field)
     {
-        [$slots, $pagination] = $this->slotService->slotList(request()->query('field_id'));
+        $slotQuery = $this->slotService->slotList($field->id);
+        [$slotData, $pagination] = $this->paginateData($slotQuery);
 
-        return $this->sendResponse(true, $slots, __("Successflly created"), 201, 0000, $pagination);
+        $data = SlotResource::collection($slotData);
+
+        return $this->sendPaginationResponse($data, $pagination);
     }
 
     public function save(SlotRequest $request)

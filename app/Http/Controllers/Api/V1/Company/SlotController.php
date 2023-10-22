@@ -35,17 +35,17 @@ class SlotController extends BaseController
         return $this->sendPaginationResponse($data, $pagination);
     }
 
-    public function save(SlotRequest $request)
+    public function store(Field $field, SlotRequest $request)
     {
         try {
-            $slotCheck = Slot::where('field_id', $request->field_id)->get();
+            $slotCheck = Slot::where('field_id', $field->id)->get();
             if ($slotCheck->count() !== 0) {
                 return $this->sendResponse(false, "", __("Slot already exist"), 404, 4001);
             }
 
             DB::beginTransaction();
-            $this->internalSlotService->saveSlotIntervals($request->field_id);
-            $this->slotService->saveSlots($request->validated());
+            $this->internalSlotService->saveSlotIntervals($field->id);
+            $this->slotService->saveSlots($field, $request->validated());
             DB::commit();
 
             return $this->sendResponse(true, "", __("Successflly created"), 201, 0000);

@@ -31,7 +31,6 @@ class SlotRequest extends FormRequest
     public function rules()
     {
         return [
-            'field_id' => 'required',
             'slot' => ['required', 'array', new SeparateTimeSlots],
             'slot.*.id' =>  'required_if:_method,PUT,PATCH|exists:slots,id',
             'slot.*.start_time' =>  'required|string',

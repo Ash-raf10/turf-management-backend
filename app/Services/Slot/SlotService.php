@@ -21,10 +21,10 @@ class  SlotService
         return Slot::where('field_id', $fieldId);
     }
 
-    public function saveSlots(array $requestData)
+    public function saveSlots(Field $field, array $requestData)
     {
         $slots = $requestData['slot'];
-        $fieldId = $requestData['field_id'];
+        $fieldId = $field->id;
         $activeStatus = GlobalStatus::getRecordStatus('Active');
 
         foreach ($slots as $slot) {

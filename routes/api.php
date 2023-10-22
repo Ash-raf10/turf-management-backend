@@ -58,7 +58,8 @@ Route::prefix('company')->middleware('auth.jwt')->group(function () {
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('turfs', TurfController::class);
     Route::apiResource('turfs.fields', FieldController::class)->shallow();
-    Route::apiResource('fields.slots', SlotController::class)->shallow();
+    Route::apiResource('fields.slots', SlotController::class)->shallow()->except('update');
+    Route::put('/fields/{field}/slots', [SlotController::class, 'update']);
 });
 
 Route::middleware('auth.jwt')->group(function () {

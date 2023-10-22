@@ -57,11 +57,11 @@ class SlotController extends BaseController
         }
     }
 
-    public function update(SlotRequest $request)
+    public function update(Field $field, SlotRequest $request)
     {
         try {
             DB::beginTransaction();
-            $this->slotService->updateSlots($request->validated());
+            $this->slotService->updateSlots($field, $request->validated());
             DB::commit();
 
             return $this->sendResponse(true, "", __("Successflly updated"), 200, 0000);

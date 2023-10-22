@@ -3,10 +3,11 @@
 namespace App\Services\Slot;
 
 use App\Models\Slot;
+use App\Models\Field;
 use App\Services\GlobalStatus;
-use App\Services\Slot\InternalSlotService;
 use App\Traits\TransformPaginate;
 use Illuminate\Database\Eloquent\Builder;
+use App\Services\Slot\InternalSlotService;
 
 class  SlotService
 {
@@ -35,17 +36,16 @@ class  SlotService
         }
     }
 
-    public function updateSlots(array $requestData)
+    public function updateSlots(Field $field, array $requestData)
     {
 
         $slots = $requestData['slot'];
-        $fieldId = $requestData['field_id'];
         $activeStatus = GlobalStatus::getRecordStatus('Active');
 
-        $this->internalSlotService->updateStatus($fieldId, GlobalStatus::getRecordStatus('Inactive'));
+        $this->internalSlotService->updateStatus($field->id, GlobalStatus::getRecordStatus('Inactive'));
 
         foreach ($slots as $slot) {
-            $slot['field_id'] = $fieldId;
+            $slot['field_id'] = $field->id;
             Slot::where('id', $slot['id'])->update($slot);
             $this->internalSlotService->updateInternalSlotStatus($slot, $activeStatus);
         }

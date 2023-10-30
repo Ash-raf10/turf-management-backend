@@ -31,6 +31,14 @@ class Field extends Model
     }
 
     /**
+     * Get all of the turf's images.
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'image');
+    }
+
+    /**
      * Get the creator of the turf.
      *
      */

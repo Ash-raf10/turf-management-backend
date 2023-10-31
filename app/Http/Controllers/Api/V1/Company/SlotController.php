@@ -6,7 +6,6 @@ use Exception;
 use App\Models\Slot;
 use App\Models\Field;
 use App\Models\Booking;
-use App\Models\InternalSlot;
 use Illuminate\Http\Request;
 use App\Models\InternalBooking;
 use App\Services\Slot\SlotService;
@@ -120,53 +119,5 @@ class SlotController extends BaseController
         $data['booked_by'] = auth()->user()->id;
 
         Booking::create($data);
-    }
-
-    public function search(Request $request)
-    {
-        $startTime = $request->start_time;
-        $endTime = $request->end_time;
-
-
-        if ($startTime > $endTime) {
-            $query = InternalBooking::where('time', '>=', $startTime)
-                ->orWhere('time', '>=', "00:00")
-                ->where('time', '<=', $endTime);
-        } else {
-            $query = InternalBooking::where('time', '>=', $startTime)
-                ->where('time', '<=', $endTime);
-        }
-
-
-        $aa = $query->whereDate('date', $request->date)
-            ->pluck('internal_slot_id')->toArray();
-
-        $slots = $this->internalSlotService->newInternalSlotsBetweenTimeRangeQuery($startTime, $endTime)
-            ->where('record_status', 'Active')->whereNotIn('id', $aa)->get();
-
-        $slots = $slots->groupBy('field_id');
-
-        $new = [];
-
-
-        foreach ($slots as $index => $slotGroup) {
-            $slotGroup = collect($slotGroup)->values(); // Reset the keys to ensure sliding works correctly
-
-            $slotGroup->sliding(2, 2)->eachSpread(function (
-                InternalSlot $previous,
-                InternalSlot $next,
-            ) use ($index, &$new) {
-
-                if ($next->sequence === ($previous->sequence + 1)) {
-
-                    $new[$index][] = [
-                        'start_time' => $previous->time,
-                        'end_time' => date("H:i:s", strtotime($next->time) + 1800),
-                    ];
-                }
-            });
-        }
-
-        return $new;
     }
 }

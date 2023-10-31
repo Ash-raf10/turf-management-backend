@@ -21,4 +21,9 @@ class Slot extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function field()
+    {
+        return $this->belongsTo(Field::class);
+    }
 }

@@ -71,16 +71,16 @@ Route::middleware('auth.jwt')->group(function () {
 
 
 
-Route::prefix('company')->middleware('auth.jwt')->group(function () {
-    Route::prefix('slot')->controller(SlotController::class)->group(function () {
-        Route::get('',  'index');
-        Route::post('save', 'save');
-        Route::put('update', 'update');
-        Route::delete('{slot}',  'delete');
-        Route::post('search',  'search');
-        Route::post('book',  'book');
-    });
-});
+// Route::prefix('company')->middleware('auth.jwt')->group(function () {
+//     Route::prefix('slot')->controller(SlotController::class)->group(function () {
+//         Route::get('',  'index');
+//         Route::post('save', 'save');
+//         Route::put('update', 'update');
+//         Route::delete('{slot}',  'delete');
+//         Route::post('search',  'search');
+//         Route::post('book',  'book');
+//     });
+// });
 
 Route::fallback(function () {
     $response = [

@@ -91,6 +91,95 @@ class InternalSlotService
         return $query;
     }
 
+
+    public function internalSlotBasedOnSearch(
+        array $searchQuery
+    ): Builder {
+
+        $type = $searchQuery['type'];
+        $district = $searchQuery['district'];
+        $startTime = $searchQuery['start_time'];
+        $endTime = $searchQuery['end_time'];
+
+        $query =  InternalSlot::whereHas('field', function ($query) use ($type) {
+            $query->where('field_type', $type);
+        })
+            ->whereHas('field.turf', function ($query) use ($district) {
+                $query->where('district', $district);
+            });
+
+        if ($startTime > $endTime) {
+            $query->where('time', '>=', $startTime)
+                ->orWhere('time', '>=', "00:00")
+                ->where('time', '<', $endTime);
+        } else {
+            $query = $query->where('time', '>=', $startTime)
+                ->where('time', '<', $endTime);
+        }
+
+        return $query;
+    }
+
+    public function groupBySlot(Collection $slots, string $columnName = 'field_id')
+    {
+        return $slots->groupBy($columnName);
+    }
+
+    public function generateSlots(Collection $slots, int $div)
+    {
+        $new = [];
+        $row = 0;
+
+        foreach ($slots as $index => $slotGroup) {
+            $slotGroup = collect($slotGroup)->values(); // Reset the keys to ensure sliding works correctly
+
+            $field = \App\Models\Field::with('turf')->find($index);
+
+
+            $new[$row]['field'] = $field;
+
+
+            if ($div === 2) {
+                $slotGroup->sliding(2, 2)->eachSpread(function (
+                    \App\Models\InternalSlot $previous,
+                    \App\Models\InternalSlot $next,
+                ) use ($row, &$new) {
+
+                    if ($next->sequence === ($previous->sequence + 1)) {
+
+                        $new[$row]['slots'][] = [
+                            'start_time' => $previous->time,
+                            'end_time' => date("H:i:s", strtotime($next->time) + 1800),
+                        ];
+                    }
+                });
+
+
+                $row++;
+            } elseif ($div === 3) {
+                $slotGroup->sliding(3, 3)->eachSpread(function (
+                    \App\Models\InternalSlot $previous,
+                    \App\Models\InternalSlot $current,
+                    \App\Models\InternalSlot $next,
+                ) use ($row, &$new) {
+
+                    if ($next->sequence === ($previous->sequence + 2)) {
+
+                        $new[$row]['slots'][] = [
+                            'start_time' => $previous->time,
+                            'end_time' => date("H:i:s", strtotime($next->time) + 1800),
+                        ];
+                    }
+                });
+
+
+                $row++;
+            }
+        }
+
+        return $new;
+    }
+
     public function updateStatus(string $fieldId, string $status)
     {
         InternalSlot::where('field_id', $fieldId)->update([

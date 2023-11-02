@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Slot\SlotRequest;
 use App\Services\Slot\InternalSlotService;
 use App\Http\Controllers\Api\V1\BaseController;
+use App\Http\Resources\FieldResource;
 use App\Http\Resources\Slot\SlotResource;
 
 class SlotController extends BaseController
@@ -89,6 +90,15 @@ class SlotController extends BaseController
 
             return $this->sendResponse(false, "", __("Something went wrong"), 404, 4001);
         }
+    }
+
+    public function info(Field $field)
+    {
+        $slot = $this->slotService->slotInfo($field);
+
+        $field->slotInfo = $slot;
+
+        return $this->sendResponse(true, new FieldResource($field), "", 200);
     }
 
     public function book(Request $request)

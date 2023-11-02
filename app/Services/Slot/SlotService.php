@@ -62,4 +62,19 @@ class  SlotService
 
         return  $slot->delete();
     }
+
+    public function slotInfo(Field $field)
+    {
+        $startTime = request()->query('start_time');
+        $endTime = request()->query('end_time');
+
+        if (!$startTime && !$endTime) {
+            return null;
+        }
+
+        $slot = $field->slots()->where('start_time', '<=', $startTime)
+            ->where('end_time', '>=', $endTime)->first();
+
+        return $slot;
+    }
 }

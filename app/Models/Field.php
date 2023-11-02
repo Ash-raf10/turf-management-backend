@@ -30,6 +30,11 @@ class Field extends Model
         return $this->belongsTo(Turf::class);
     }
 
+    public function slots()
+    {
+        return $this->hasMany(Slot::class);
+    }
+
     /**
      * Get all of the turf's images.
      */

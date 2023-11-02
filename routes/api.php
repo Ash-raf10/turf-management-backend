@@ -64,6 +64,8 @@ Route::prefix('company')->middleware('auth.jwt')->group(function () {
 });
 
 Route::post('slot/search',  [SlotSearchController::class, 'search']);
+Route::get('/fields/{field}/slots/info', [SlotController::class, 'info']);
+
 
 Route::middleware('auth.jwt')->group(function () {
     Route::apiResource('documents/images', ImageController::class)->only('store', 'destroy');

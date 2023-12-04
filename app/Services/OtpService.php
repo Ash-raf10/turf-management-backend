@@ -5,11 +5,14 @@ namespace App\Services;
 use Carbon\Carbon;
 use App\Models\Otp;
 use App\Models\User;
+use Illuminate\Http\Request;
 use App\Services\Sms\SmsService;
 use App\Traits\InternalResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Traits\InternalResponseObject;
 use App\Services\Sms\SmsProviderService;
+use Illuminate\Support\Facades\Validator;
 
 class OtpService
 {
@@ -189,5 +192,42 @@ class OtpService
         $otpResponse = $this->filterOtpResponse($otpResponse->data);
 
         return $this->response(true, $otpResponse, $msg);
+    }
+
+    
+    /**
+     * otpValidateFromMiddleware
+     *
+     * @param  Request $request
+     * @return InternalResponseObject
+     */
+    public function otpValidateFromMiddleware(Request $request)
+    {
+        $validatedData =  Validator::make($request->all(), [
+            'otp' => 'required|numeric|digits:6',
+            'token' => 'required|uuid',
+        ])->validate();
+
+
+        $otp = Otp::whereId($validatedData['token'])->where('is_valid', 1)->first();
+        // if not found
+        if (!$otp) {
+            DB::rollBack();
+            Log::info("OTP not found");
+            return $this->response(false, "", __("OTP not found"));
+        }
+        Log::info("OTP - " . json_encode($otp));
+        // check submitted otp
+        $matchResponse = self::checkValidity($otp, $validatedData);
+
+        if (!$matchResponse->success) {
+            Log::info("OTP did not match");
+            DB::commit();
+            return $this->response(false, $matchResponse->data, $matchResponse->msg);
+        }
+
+        DB::commit();
+
+        return $this->response(true, $matchResponse->data, $matchResponse->msg);
     }
 }

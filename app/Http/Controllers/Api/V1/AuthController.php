@@ -108,6 +108,19 @@ class AuthController extends BaseController
     }
 
 
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+        $userModel = User::find($user->id);
+
+        $userModel->update(['password' => Hash::make($request->new_password)]);
+               
+        Auth::logout();
+
+        return $this->sendResponse(true, "", __("Successfully logged out"), 200, 6000);
+    }
+
+
 
     /**
      * refresh token

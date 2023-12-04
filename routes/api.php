@@ -38,6 +38,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(OtpController::class)->group(function () {
     Route::post('otp', 'matchOtp');
     Route::post('otp/resend', 'resendOtp');
+    Route::get('otp','generateOtp');
 });
 
 Route::middleware('auth.jwt')->controller(AuthController::class)->group(function () {

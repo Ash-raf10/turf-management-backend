@@ -7,6 +7,7 @@ use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\UpdateMeRequest;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Http\Requests\SocialLoginRequest;
 use App\Http\Resources\UserResource;
@@ -74,6 +75,16 @@ class AuthController extends BaseController
         $user = $this->authService->getAuthUser();
 
         return $this->sendResponse(true, $user, "", 200, 0000);
+    }
+
+    public function updateMe(UpdateMeRequest $request)
+    {
+        $user = Auth::user();
+        $userModel = User::find($user->id);
+       
+        $userModel->update($request->validated());
+
+       return redirect()->action([AuthController::class, 'me']);
     }
 
     /**

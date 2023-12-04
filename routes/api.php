@@ -45,6 +45,7 @@ Route::middleware('auth.jwt')->controller(AuthController::class)->group(function
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
     Route::get('me', 'me');
+    Route::put('me', 'updateMe');
 });
 
 Route::prefix('customer')->controller(CustomerController::class)->group(function () {

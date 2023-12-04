@@ -31,7 +31,7 @@ class OtpRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            // if any change is made here, make sure to change OtpVerificationMiddleware
             'otp' =>
             [Rule::requiredIf(fn () => request()->routeIs('otp')), 'numeric', 'digits:6'],
             'token' => 'required|uuid',

@@ -46,6 +46,7 @@ Route::middleware('auth.jwt')->controller(AuthController::class)->group(function
     Route::post('refresh', 'refresh');
     Route::get('me', 'me');
     Route::put('me', 'updateMe');
+    Route::put('me/change-identifier','changeUserIdentifier');
 });
 
 Route::prefix('customer')->controller(CustomerController::class)->group(function () {

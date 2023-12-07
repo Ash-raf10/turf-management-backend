@@ -88,12 +88,13 @@ class AuthController extends BaseController
        
         $userModel->update($request->validated());
 
-       return redirect()->action([AuthController::class, 'me']);
+        return $this->sendResponse(true, $userModel, "", 200, 0000);
     }
 
 
     public function changeUserIdentifier(UserIdentifierRequest $request)
     {
+        dd($request);
         $user = Auth::user();
         $userModel = User::find($user->id);
 

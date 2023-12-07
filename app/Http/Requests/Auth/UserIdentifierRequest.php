@@ -41,10 +41,10 @@ class UserIdentifierRequest extends FormRequest
     {
         $authUser =  auth()->user();
         return [
-            'email' => ['required_without:mobile','email','max:255',Rule::unique('turfs')->ignore($authUser)],
+            'email' => ['required_without:mobile','email','max:255',Rule::unique('users')->ignore($authUser)],
             'mobile' =>  [
                 'required_without:email', 'string', 'regex:/^(((\+|00)?880)|0)(\d){10}$/',
-                'max:20', 'min:11',Rule::unique('turfs')->ignore($authUser)  //  mobile number should be unique
+                'max:20', 'min:11',Rule::unique('users')->ignore($authUser)  //  mobile number should be unique
             ],
             "password" => "required|current_password:api",
         ];

@@ -94,7 +94,6 @@ class AuthController extends BaseController
 
     public function changeUserIdentifier(UserIdentifierRequest $request)
     {
-        dd($request);
         $user = Auth::user();
         $userModel = User::find($user->id);
 

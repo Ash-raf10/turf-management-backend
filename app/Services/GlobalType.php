@@ -7,7 +7,9 @@ class GlobalType
     private static $otpType = [
         'Registration' => 'Registration',
         'ForgotPassword' => 'ForgotPassword',
-        'Login' => 'Login'
+        'Login' => 'Login',
+        'IdentifierChange' => 'IdentifierChange',
+        'ValidateUser' => 'ValidateUser'
     ];
 
     private static $fieldType = [

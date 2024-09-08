@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\User;
 use App\Facades\OtpFacade;
+use App\Services\GlobalType;
 use App\Services\AuthService;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Controllers\Api\V1\BaseController;
 use App\Http\Requests\SocialLoginRequest;
-use App\Http\Resources\UserResource;
-use App\Services\GlobalType;
-use App\Services\UserService;
+use App\Http\Requests\Auth\UpdateMeRequest;
+use App\Http\Controllers\Api\V1\BaseController;
+use App\Http\Requests\Auth\ChangePasswordRequest;
+use App\Http\Requests\Auth\UserIdentifierRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends BaseController
 {
@@ -75,6 +80,47 @@ class AuthController extends BaseController
 
         return $this->sendResponse(true, $user, "", 200, 0000);
     }
+
+    public function updateMe(UpdateMeRequest $request)
+    {
+        $user = Auth::user();
+        $userModel = User::find($user->id);
+       
+        $userModel->update($request->validated());
+
+        return $this->sendResponse(true, $userModel, "", 200, 0000);
+    }
+
+
+    public function changeUserIdentifier(UserIdentifierRequest $request)
+    {
+        $user = Auth::user();
+        $userModel = User::find($user->id);
+
+        $validatedData = $request->validated();
+        $validatedData['otp_verified'] = 0;
+       
+        $userModel->update($validatedData);
+        
+        Auth::logout();
+
+        return $this->sendResponse(true, "", __("Successfully logged out"), 200, 6000);
+    }
+
+
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+        $userModel = User::find($user->id);
+
+        $userModel->update(['password' => Hash::make($request->new_password)]);
+               
+        Auth::logout();
+
+        return $this->sendResponse(true, "", __("Successfully logged out"), 200, 6000);
+    }
+
+
 
     /**
      * refresh token

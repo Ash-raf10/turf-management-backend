@@ -30,6 +30,19 @@ class Field extends Model
         return $this->belongsTo(Turf::class);
     }
 
+    public function slots()
+    {
+        return $this->hasMany(Slot::class);
+    }
+
+    /**
+     * Get all of the turf's images.
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'image');
+    }
+
     /**
      * Get the creator of the turf.
      *

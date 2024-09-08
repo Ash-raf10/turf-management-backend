@@ -12,6 +12,7 @@ trait ApiResponse
      * @param array|string $message    message to show to the user
      * @param int         $statusCode http status codes
      * @param int         $internalCode for our use
+     * @param array         $pagination for list
      * @return \Illuminate\Http\JsonResponse
      */
     protected function sendResponse(
@@ -19,7 +20,8 @@ trait ApiResponse
         mixed $data = "",
         array|string $message = "",
         int $statusCode = 200,
-        $internalCode = 0000
+        $internalCode = 0000,
+        $pagination = []
     ) {
         $response = [
             'success' => $status,
@@ -27,6 +29,10 @@ trait ApiResponse
             'message' => $message,
             'code' => $internalCode
         ];
+
+        if (!empty($pagination)) {
+            $response['pagination'] = $pagination;
+        }
 
         return response()->json($response, $statusCode);
     }

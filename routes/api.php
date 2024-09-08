@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\V1\Company\FieldController;
 use App\Http\Controllers\Api\V1\Company\CompanyController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Documents\ImageController;
+use App\Http\Controllers\Api\V1\Company\SlotController;
+use App\Http\Controllers\Api\V1\Customer\SlotSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,13 +63,30 @@ Route::prefix('company')->middleware('auth.jwt')->group(function () {
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('turfs', TurfController::class);
     Route::apiResource('turfs.fields', FieldController::class)->shallow();
+    Route::apiResource('fields.slots', SlotController::class)->shallow()->except('update');
+    Route::put('/fields/{field}/slots', [SlotController::class, 'update']);
 });
+
+Route::post('slot/search',  [SlotSearchController::class, 'search']);
+Route::get('/fields/{field}/slots/info', [SlotController::class, 'info']);
+
 
 Route::middleware('auth.jwt')->group(function () {
     Route::apiResource('documents/images', ImageController::class)->only('store', 'destroy');
 });
 
 
+
+// Route::prefix('company')->middleware('auth.jwt')->group(function () {
+//     Route::prefix('slot')->controller(SlotController::class)->group(function () {
+//         Route::get('',  'index');
+//         Route::post('save', 'save');
+//         Route::put('update', 'update');
+//         Route::delete('{slot}',  'delete');
+//         Route::post('search',  'search');
+//         Route::post('book',  'book');
+//     });
+// });
 
 Route::fallback(function () {
     $response = [

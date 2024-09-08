@@ -11,9 +11,35 @@ use App\Http\Requests\OtpRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Api\V1\BaseController;
+use App\Http\Requests\OtpGenerateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class OtpController extends BaseController
-{
+{    
+    /**
+     * generateOtp
+     *
+     * @param  OtpGenerateRequest $otpGenerateRequest
+     * @param  UserService $userService
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function generateOtp(OtpGenerateRequest $otpGenerateRequest, UserService $userService)
+    {
+        DB::beginTransaction();
+        $user = Auth::user();
+        
+        $otpResponse = $userService->generateOtpForUser($user,$otpGenerateRequest->otp_type);
+        if (!$otpResponse->success) {
+            DB::rollBack();
+            return $this->sendResponse($otpResponse->success, "", __("Something went wrong"), 400);
+        }
+
+        DB::commit();
+        $userService->sendOtp($user, $otpResponse->data);
+        $otpResponse = OtpFacade::filterOtpResponse($otpResponse->data);
+
+        return $this->sendResponse(true, $otpResponse, __("Please verify the OTP"), 200, 6001);
+    }
     /**
      * matchOtp
      *

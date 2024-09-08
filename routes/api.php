@@ -38,12 +38,16 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(OtpController::class)->group(function () {
     Route::post('otp', 'matchOtp');
     Route::post('otp/resend', 'resendOtp');
+    Route::get('otp','generateOtp');
 });
 
 Route::middleware('auth.jwt')->controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
     Route::get('me', 'me');
+    Route::put('me', 'updateMe');
+    Route::put('me/change-identifier','changeUserIdentifier');
+    Route::put('me/change-password','changePassword');
 });
 
 Route::prefix('customer')->controller(CustomerController::class)->group(function () {

@@ -1,66 +1,110 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Here is a sample `README.md` file for your project, based on the steps you provided:
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+```markdown
+# Turf Management Backend
 
-## About Laravel
+This repository contains the backend for the Turf Management system. You can view the project specification [here](https://docs.google.com/document/d/1nMc5BU3PvIJLAgdNgFG4Ca_xGuTRBv_7cLsAfWrUg9A/edit?usp=sharing). We have used jira as the project managment tool.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Prerequisites
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Ensure you have the following installed on your machine:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Git
+- Docker
+- Docker Compose
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Clone the Repository
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Copy the Environment Configuration
 
-## Laravel Sponsors
+```bash
+cp .env.example .env
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 3. Start Docker Containers
 
-### Premium Partners
+Use `docker-compose` to start the application in detached mode:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+sudo docker-compose up -d
+```
 
-## Contributing
+### 4. Access the PHP Container
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Once the containers are up, access the `php-fpm` container:
 
-## Code of Conduct
+```bash
+sudo docker exec -it turf-management-backend_php-fpm_1 sh
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 5. Navigate to the Project Directory
 
-## Security Vulnerabilities
+Inside the container, navigate to the Laravel project root:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+cd /var/www
+```
+
+### 6. Generate Laravel Application Key
+
+Generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+### 7. Generate JWT Secret
+
+Set up the JWT authentication secret:
+
+```bash
+php artisan jwt:secret
+```
+
+### 7. Migrate and seeding
+
+Migrate the db table and seed using:
+
+```bash
+php artisan migrate --seed
+```
+
+## Additional Notes
+
+- Ensure your `.env` file is properly configured before proceeding with migrations or seeding.
+- You may need to run migrations and seeders if your project requires them.
+
+## Postman collection
+
+- you can test the api using the postman collection. The collection is stored on the {root}/postman named as tms.json
+- register a user using the api of company->company register
+- after succesful registration it will send a otp on the registered mobile and the response will contain a token
+- you can get the otp from laravel telesope log
+- simply copy the token and the otp
+- go to the api of Otp-> match otp, call the api with token and otp
+- after success, it will return the jwt token
+- use the token as a bearer token
+- test the api's
+- you can also create end customer using customer->register endpoint
+
+## Telescope
+
+- you can access telescope by visiting {app_url}/telescope
+- if visiting telescope gives this error `Mix manifest not found` then run this
+
+
+```bash
+php artisan vendor:publish --tag=telescope-assets
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under [MIT License](LICENSE).
+```

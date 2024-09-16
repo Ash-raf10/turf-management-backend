@@ -1,0 +1,1545 @@
+{
+	"info": {
+		"_postman_id": "fab6730f-bbdb-4a7b-9728-d0af36c28706",
+		"name": "API/V1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6511695",
+		"_collection_link": "https://tms-amigos.postman.co/workspace/tms~fdd8e5b1-ddb0-4939-b8c1-8c146c06375e/collection/6511695-fab6730f-bbdb-4a7b-9728-d0af36c28706?action=share&source=collection_link&creator=6511695"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"email_phone\":\"01676431025\",\n//     \"password\": \"@Sh123sh\"\n// }\n\n{\n    \"email_phone\":\"admin@gmail.com\",\n    \"password\": \"@Sh123sh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/login",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/logout",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update me",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"qwqwqwq\",\n    \"first_name\" :\"dsada\",\n    \"last_name\":\"Czca\",\n    \"address\": \"ADasd\",\n    \"city\" : \"Dhaka\",\n    \"zip_code\" : \"5363\",\n    \"birth_date\" : \"1998-02-23\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update identifier",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\" : \"@Sh123sh\",\n    \"email\": \"admin@gmail.com\",\n    \"mobile\" : \"01676431025\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/me/change-identifier",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me",
+								"change-identifier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-payment Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\" : \"@Sh123sh\",\n    \"new_password\": \"admin@gmA112\",\n    \"new_password_confirmation\" : \"admin@gmA112\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/me/change-password",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-payment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bkash-test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{app_url}}/refresh",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "social-login",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update me-adnan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"qwqwqwq\",\r\n    \"first_name\" :\"dsada\",\r\n    \"last_name\":\"Czca\",\r\n    \"address\": \"ADasd\",\r\n    \"city\" : \"Dhaka\",\r\n    \"zip_code\" : \"5363\",\r\n    \"birth_date\" : \"1998-02-23\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication Copy",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"email_phone\":\"01676431025\",\n//     \"password\": \"@Sh123sh\"\n// }\n\n{\n    \"email_phone\":\"admin@amigos.com\",\n    \"password\": \"Test@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/login",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/logout",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-payment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-payment Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bkash-test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}/me",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{app_url}}/refresh",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "social-login",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Ashraf\",\n    \"email\":\"ashraf@test.com\",\n    \"password\": \"@Sh123sh\",\n    \"mobile\": \"+8801676431025\",\n    \"city\": \"Chittagong\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/customer/register",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"customer",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Ashraf\",\n    \"email\":\"ashraf@test.com\",\n    \"password\": \"@Sh123sh\",\n    \"mobile\": \"+8801676431025\",\n    \"city\": \"Chittagong\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/customer/register",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"customer",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Otp",
+			"item": [
+				{
+					"name": "matchOtp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"99f97cd8-287d-47d0-aa54-40df3f5fbcae\",\n    \"otp\" : \"415245\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/otp",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate otp",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/otp",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resend OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"99f97cd8-287d-47d0-aa54-40df3f5fbcae\",\n    \"otp\" : \"415245\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/otp/resend",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"otp",
+								"resend"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mobile SMS ntegration",
+			"item": [
+				{
+					"name": "Balance API",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "///Response\n{\n    \"status\": \"ok\",\n    \"balance\": \"998\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://www.24bulksmsbd.com/api/balance?customer_id=customer_id&api_key=api_key",
+							"protocol": "http",
+							"host": [
+								"www",
+								"24bulksmsbd",
+								"com"
+							],
+							"path": [
+								"api",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "customer_id",
+									"value": "customer_id"
+								},
+								{
+									"key": "api_key",
+									"value": "api_key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report API",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "////// RESPONSE\n\n{\n    \"status\": \"ok\",\n    \"data\": [\n        {\n            \"sms\": \"This is test msg from Ashraf\",\n            \"receiver_no\": \"+8801856683672\",\n            \"create_date_time\": \"2023-08-28 16:53:39\",\n            \"status\": \"0\"\n        },\n        {\n            \"sms\": \"This is test msg from Ashraf\",\n            \"receiver_no\": \"+8801765666762\",\n            \"create_date_time\": \"2023-08-28 16:53:39\",\n            \"status\": \"0\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://www.24bulksmsbd.com/api/report?customer_id=Your customer_id&api_key=your api key&sms_ids=sms id,sms id,sms id...",
+							"protocol": "http",
+							"host": [
+								"www",
+								"24bulksmsbd",
+								"com"
+							],
+							"path": [
+								"api",
+								"report"
+							],
+							"query": [
+								{
+									"key": "customer_id",
+									"value": "Your customer_id"
+								},
+								{
+									"key": "api_key",
+									"value": "your api key"
+								},
+								{
+									"key": "sms_ids",
+									"value": "sms id,sms id,sms id..."
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sms Send(Same)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\" : \"ok\",\n    \"message\": \"Successfully sent sms\",\n    \"sms_id\" :\"1212132\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://www.24bulksmsbd.com/api/smsSendApi?customer_id=499&api_key=177534230849914601676431025&message=Your Message&mobile_no= Customer Mobile Number",
+							"protocol": "http",
+							"host": [
+								"www",
+								"24bulksmsbd",
+								"com"
+							],
+							"path": [
+								"api",
+								"smsSendApi"
+							],
+							"query": [
+								{
+									"key": "customer_id",
+									"value": "499"
+								},
+								{
+									"key": "api_key",
+									"value": "177534230849914601676431025"
+								},
+								{
+									"key": "message",
+									"value": "Your Message"
+								},
+								{
+									"key": "mobile_no",
+									"value": " Customer Mobile Number"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Role",
+					"item": [
+						{
+							"name": "role-list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{app_url}}/company/roles",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Turf",
+					"item": [
+						{
+							"name": "turf store",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "// {\n//     \"name\": \"StaidumX\",\n//      \"email\": \"StaidumX@gmail.com\",\n//     \"mobile\": \"01711167479\",\n//     \"fb_page\" : \"https://www.StaidumX.com\",\n//     \"address\": \"Khulshi, CDA road no 10\",\n//     \"district\": \"chittagong\",\n//     \"website\": \"https://www.StaidumX.com\"\n// }\n{\n    \"name\": \"Amigos\",\n    \"email\": \"amigos@gmail.com\",\n    \"mobile\": \"01711167478\",\n    \"fb_page\" : \"https://www.amigos.com\",\n    \"address\": \"Agrabad, CDA road no 15\",\n    \"district\": \"chittagong\",\n    \"website\": \"https://www.amigos.com\",\n    \"description\": \"Test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/turfs",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"turfs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "turf update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Amigos\",\n    \"email\": \"amigos@gmail.com\",\n    \"mobile\": \"01711167478\",\n    \"fb_page\" : \"https://www.amigos.com\",\n    \"address\": \"Agrabad, CDA road no 15\",\n    \"district\": \"chittagong\",\n    \"website\": \"https://www.amigos.com\",\n    \"description\": \"Test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/turfs/9a4e8c23-06b9-452b-aa5c-9953e9690628",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"turfs",
+										"9a4e8c23-06b9-452b-aa5c-9953e9690628"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "turf",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Amigos\",\n    \"email\": \"amigos@gmail.com\",\n    \"mobile\": \"01711167478\",\n    \"fb_page\" : \"https://www.amigos.com\",\n    \"address\": \"Agrabad, CDA road no 15\",\n    \"district\": \"chittagong\",\n    \"website\": \"https://www.amigos.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/turfs/9a4eae0b-a3ff-4bbb-9bd6-2aeea693bf71",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"turfs",
+										"9a4eae0b-a3ff-4bbb-9bd6-2aeea693bf71"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "turf delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Amigos\",\n    \"email\": \"amigos@gmail.com\",\n    \"mobile\": \"01711167478\",\n    \"fb_page\" : \"https://www.amigos.com\",\n    \"address\": \"Agrabad, CDA road no 15\",\n    \"district\": \"chittagong\",\n    \"website\": \"https://www.amigos.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/turfs/9a4f8237-5e22-43db-8d7b-e4e49d8fb691",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"turfs",
+										"9a4f8237-5e22-43db-8d7b-e4e49d8fb691"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "turf list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Amigos\",\n    // \"email\": \"amigos@gmail.com\",\n    \"mobile\": \"01711167478\",\n    \"fb_page\" : \"https://www.amigos.com\",\n    \"location\": \"Agrabad, CDA road no 15\",\n    \"district\": \"chittagong\",\n    \"website\": \"https://www.amigos.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/turfs",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"turfs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Field",
+					"item": [
+						{
+							"name": "Field Store",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Football 7v7\",\n    \"field_type\": \"Football\",\n    \"description\": \"t1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/turfs/9a4eae0b-a3ff-4bbb-9bd6-2aeea693bf71/fields",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"turfs",
+										"9a4eae0b-a3ff-4bbb-9bd6-2aeea693bf71",
+										"fields"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Field",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/fields/9a4fc39a-406f-4421-bd31-fcedf0a62364",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"fields",
+										"9a4fc39a-406f-4421-bd31-fcedf0a62364"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Field Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cricket Field\",\n    \"field_type\": \"Cricket\",\n    \"description\": \"Test1\",\n    \"record_status\" : \"Inactive\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/fields/9a4fc39a-406f-4421-bd31-fcedf0a62364",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"fields",
+										"9a4fc39a-406f-4421-bd31-fcedf0a62364"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "field delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/fields/9a4fc39a-406f-4421-bd31-fcedf0a62364",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"fields",
+										"9a4fc39a-406f-4421-bd31-fcedf0a62364"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Field List",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Amigos\",\n    // \"email\": \"amigos@gmail.com\",\n    \"mobile\": \"01711167478\",\n    \"fb_page\" : \"https://www.amigos.com\",\n    \"location\": \"Agrabad, CDA road no 15\",\n    \"district\": \"chittagong\",\n    \"website\": \"https://www.amigos.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/turfs/9a4eae0b-a3ff-4bbb-9bd6-2aeea693bf71/fields",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"turfs",
+										"9a4eae0b-a3ff-4bbb-9bd6-2aeea693bf71",
+										"fields"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Slots",
+					"item": [
+						{
+							"name": "slot-save",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"slot\": [\n         {\n            \"start_time\": \"08:00\",\n            \"end_time\": \"17:00\",\n            \"type\": \"day\",\n            \"price\": 2000\n        },\n        {\n            \"start_time\": \"18:00\",\n            \"end_time\": \"03:00\",\n            \"type\": \"night\",\n            \"price\": 2500\n        }\n        // {\n        //     \"start_time\": \"01:00\",\n        //     \"end_time\": \"05:00\",\n        //      \"type\": \"mid-night\",\n        //      \"price\": 1200\n        // }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/fields/9a6bfa45-ea0d-489f-a66c-072026de0c2c/slots",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"fields",
+										"9a6bfa45-ea0d-489f-a66c-072026de0c2c",
+										"slots"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "slot-index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/fields/9a6bfa45-ea0d-489f-a66c-072026de0c2c/slots",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"fields",
+										"9a6bfa45-ea0d-489f-a66c-072026de0c2c",
+										"slots"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "slot-delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/slot/9a306f60-1d65-4bf7-ac9d-946c26a58589",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"slot",
+										"9a306f60-1d65-4bf7-ac9d-946c26a58589"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "slot-update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"slot\": [\n        {\n            \"id\": \"9a6bfcaf-3a58-4a5c-aa79-b8b4dba6da4b\",\n            \"start_time\": \"09:00:00\",\n            \"end_time\": \"17:00:00\",\n            \"type\": \"newDay\",\n            \"price\": 2200\n        },\n        {\n            \"id\": \"9a6bfcaf-3bf8-431d-9f9b-25af161c6051\",\n            \"start_time\": \"17:00:00\",\n            \"end_time\": \"00:00:00\",\n            \"type\": \"newNight\",\n            \"price\": 1700\n        },\n        {\n            \"id\": \"9a6bfcaf-3ea1-4d7b-a94e-34d38edf0b6b\",\n            \"start_time\": \"00:00:00\",\n            \"end_time\": \"06:00:00\",\n            \"type\": \"newMid-night\",\n            \"price\": 1400\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/fields/9a6bfa45-ea0d-489f-a66c-072026de0c2c/slots",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"fields",
+										"9a6bfa45-ea0d-489f-a66c-072026de0c2c",
+										"slots"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "slot-create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"slot\": [\n        {\n            \"start_time\": \"19:00\",\n            \"end_time\": \"02:00\",\n            \"type\": \"ramdan-evening\",\n            \"price\": 2500\n        },\n        {\n            \"start_time\": \"10:00\",\n            \"end_time\": \"17:00\",\n            \"type\": \"ramdan-day\",\n            \"price\": 1700\n        },\n        {\n            \"start_time\": \"05:00\",\n            \"end_time\": \"10:00\",\n            \"type\": \"ramdan-morning\",\n            \"price\": 1200\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{app_url}}/company/fields/9a6bfa45-ea0d-489f-a66c-072026de0c2c/slots",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"company",
+										"fields",
+										"9a6bfa45-ea0d-489f-a66c-072026de0c2c",
+										"slots"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Company Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"company_name\":\"Adnan Turf\",\r\n    \"address\" : \"Dhaka\",\r\n    \"company_email\": \"tms@gmail.com\",\r\n    \"company_phone\" : \"01856683672\",\r\n    \"page_url\" : \"https://www.facebook.com/AdnanTurf\",\r\n    \"name\":\"Adnan\",\r\n    \"email\":\"anwaradnan005@gmail.com\",\r\n    \"password\": \"@Dn@n123\",\r\n    \"password_confirmation\" : \"@Dn@n123\",\r\n    \"mobile\": \"01856683672\",\r\n    \"city\": \"Dhaka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/company/register",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"company",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token_company}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Document",
+			"item": [
+				{
+					"name": "images",
+					"item": [
+						{
+							"name": "upload doc",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "turf",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "9a4f8237-5e22-43db-8d7b-e4e49d8fb691",
+											"type": "text"
+										},
+										{
+											"key": "images[0][file]",
+											"type": "file",
+											"src": "/home/ashraf/Downloads/WhatsApp Image 2023-10-17 at 23.08.29.jpeg"
+										},
+										{
+											"key": "images[0][note]",
+											"value": "new2",
+											"type": "text"
+										},
+										{
+											"key": "images[1][file]",
+											"type": "file",
+											"src": "/home/ashraf/Downloads/WhatsApp Image 2023-10-17 at 23.08.29.jpeg"
+										},
+										{
+											"key": "images[1][note]",
+											"value": "new3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{app_url}}/documents/images",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"documents",
+										"images"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete doc",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{app_url}}/documents/images/9a6a8cf0-caa5-436c-9171-65dd20a8c1b4",
+									"host": [
+										"{{app_url}}"
+									],
+									"path": [
+										"documents",
+										"images",
+										"9a6a8cf0-caa5-436c-9171-65dd20a8c1b4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Slot",
+			"item": [
+				{
+					"name": "slot-search",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\":\"Football\",\n    \"district\": \"chittagong\",\n    \"start_time\" : \"22:00\",\n    \"end_time\": \"06:00\",\n    \"date\" : \"2023-09-28\",\n    \"duration\" : 90\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/slot/search",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"slot",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "slot-info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\":\"Football\",\n    \"district\": \"chittagong\",\n    \"start_time\" : \"13:00\",\n    \"end_time\": \"19:00\",\n    \"date\" : \"2023-09-28\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/fields/9a6bfa45-ea0d-489f-a66c-072026de0c2c/slots/info?start_time=15:00:00&end_time=16:00:00",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"fields",
+								"9a6bfa45-ea0d-489f-a66c-072026de0c2c",
+								"slots",
+								"info"
+							],
+							"query": [
+								{
+									"key": "start_time",
+									"value": "15:00:00"
+								},
+								{
+									"key": "end_time",
+									"value": "16:00:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "slot-book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start_time\" : \"10:00\",\n    \"end_time\": \"05:00\",\n    \"field_id\": \"3\",\n    \"type\" : \"0ff-peak\",\n    \"price\": 1700\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{app_url}}/slot/book",
+							"host": [
+								"{{app_url}}"
+							],
+							"path": [
+								"slot",
+								"book"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({",
+					"    key: \"Accept\",",
+					"    value: \"application/json\"",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

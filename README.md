@@ -1,6 +1,3 @@
-Here is a sample `README.md` file for your project, based on the steps you provided:
-
-```markdown
 # Turf Management Backend
 
 This repository contains the backend for the Turf Management system. You can view the project specification [here](https://docs.google.com/document/d/1nMc5BU3PvIJLAgdNgFG4Ca_xGuTRBv_7cLsAfWrUg9A/edit?usp=sharing). We have used jira as the project managment tool.

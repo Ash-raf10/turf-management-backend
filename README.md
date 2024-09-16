@@ -1,5 +1,7 @@
 # Turf Management Backend
 
+### The original project was on [bitbucket](https://bitbucket.org/turf-management/turf-management-backend/src/develop/). I have imported the project on github for better organization.
+
 This repository contains the backend for the Turf Management system. You can view the project specification [here](https://docs.google.com/document/d/1nMc5BU3PvIJLAgdNgFG4Ca_xGuTRBv_7cLsAfWrUg9A/edit?usp=sharing). We have used jira as the project managment tool.
 
 ## Prerequisites
